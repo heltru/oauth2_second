@@ -29,8 +29,8 @@ class Authorization
             return false;
         }
 
-        $registered_redirect_uri = $clientData['redirect_uri'];
-        if (!$this->validateRedirectUri($_REQUEST['redirect_uri'], $registered_redirect_uri)) {
+
+        if (!$this->validateRedirectUri($_REQUEST['redirect_uri'], $clientData['redirect_uri'])) {
             return false;
         };
 
@@ -42,7 +42,7 @@ class Authorization
             'scope' => $scope,
             'state' => $state,
             'client_id' => $client_id,
-            'redirect_uri' => $registered_redirect_uri
+            'redirect_uri' => $clientData['redirect_uri']
         );
 
         $code = $this->generateAuthorizationCode();
