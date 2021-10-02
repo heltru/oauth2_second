@@ -49,7 +49,7 @@ class Authorization
         $code_ = $this->db->prepare(sprintf('SELECT * from oauth_authorization_codes where authorization_code = :code'));
 
         $expires = date('Y-m-d H:i:s', time() + $this->auth_code_lifetime);
-        if ($code_) {//скорей всего ни когда не найдет
+        if ($code_) {
             $stmt = $this->db->prepare($sql = sprintf('UPDATE oauth_authorization_codes SET client_id=:client_id, user_id=:user_id, redirect_uri=:redirect_uri, expires=:expires, scope=:scope where authorization_code=:code'));
         } else {
             $stmt = $this->db->prepare(sprintf('INSERT INTO oauth_authorization_codes (authorization_code, client_id, user_id, redirect_uri, expires, scope) VALUES (:code, :client_id, :user_id, :redirect_uri, :expires, :scope)'));

@@ -53,7 +53,7 @@ class Token
 
         $expires = date('Y-m-d H:i:s', time() + $this->access_lifetime );
         $token = $this->db->prepare(sprintf('SELECT * from oauth_access_tokens where access_token = :access_token'));
-        if ($token) {//скорей всего ни когда не найдет
+        if ($token) {
             $token = $this->db->prepare(sprintf('UPDATE oauth_access_tokens SET client_id=:client_id, expires=:expires, user_id=:user_id, scope=:scope where access_token=:access_token'));
         } else {
             $token = $this->db->prepare(sprintf('INSERT INTO oauth_access_tokens (access_token, client_id, expires, user_id, scope) VALUES (:access_token, :client_id, :expires, :user_id, :scope)'));
